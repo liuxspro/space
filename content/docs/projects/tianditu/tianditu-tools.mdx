@@ -1,0 +1,51 @@
+---
+title: Tianditu Tools
+description: QGIS插件—快速添加天地图底图
+icon: TiandituLogo
+---
+
+<img src="/images/tianditu/vec.webp" className="rounded-md shadow-md" />
+
+QGIS 天地图插件，方便进行天地图瓦片底图的添加以及简单实现了部分[天地图 Web 服务 API](http://lbs.tianditu.gov.cn/server/guide.html)（地名搜索、地理编码查询、逆地理编码查询）
+
+## 安装
+
+在 QGIS 插件库中搜索`tianditu`，点击安装即可。
+
+![](/images/tianditu/plugin.webp)
+
+## 使用说明
+
+安装插件后，可在 QGIS 工具栏中看到工具按钮，按钮功能分别为添加底图、搜索、以及设置
+
+![](/images/tianditu/设置.webp)
+
+### 设置天地图 Key
+
+使用前需要设置天地图 Key，输入 key，点击保存按钮
+
+可以保存多个 key，选择使用或者随机选用 key.
+
+<Callout>
+  天地图 key 需要到 [天地图控制台](https://console.tianditu.gov.cn/api/key)
+  去申请，申请的类型为“**浏览器端**” 或者 “**Android平台**”
+</Callout>
+
+### 天地图底图添加
+
+在工具栏下拉菜单中选择底图，点击即可添加到当前工程中。
+
+<img src="/images/tianditu/添加底图.webp" width={200} className="m-auto" />
+
+<Callout>
+  `天地图 - 山体阴影` 需要特殊权限，在 key 管理页面，勾选第三方服务中的
+  `terrain-rgb_w`
+</Callout>
+
+### 天地图 Web 服务 API
+
+|                  地名搜索                   |                    地理编码                     |                     逆地理编码                      |
+| :-----------------------------------------: | :---------------------------------------------: | :-------------------------------------------------: |
+| ![地名搜索](/images/tianditu/地名搜索.webp) | ![地理编码查询](/images/tianditu/地理编码.webp) | ![逆地理编码查询](/images/tianditu/逆地理编码.webp) |
+
+双击结果项(或点击链接)可添加至当前地图中。
