@@ -1,7 +1,7 @@
 import { docs } from "fumadocs-mdx:collections/server";
 import { type InferPageType, loader } from "fumadocs-core/source";
 import { lucideIconsPlugin } from "fumadocs-core/source/lucide-icons";
-import { TiandituLogo } from "./custom_icons";
+import { customIcons } from "./custom_icons";
 import { icons } from "lucide-react";
 import { createElement } from "react";
 import { i18n } from "@/lib/i18n";
@@ -12,8 +12,8 @@ export const source = loader({
   source: docs.toFumadocsSource(),
   plugins: [lucideIconsPlugin()],
   icon(icon) {
-    if (icon === "TiandituLogo") {
-      return createElement(TiandituLogo);
+    if (icon && icon in customIcons) {
+      return createElement(customIcons[icon as keyof typeof customIcons]);
     }
     if (icon && icon in icons) {
       return createElement(icons[icon as keyof typeof icons]);
