@@ -3,13 +3,22 @@ title: Tianditu Tools
 description: QGIS插件—快速添加天地图底图
 icon: TiandituLogo
 ---
-import { GithubInfo } from 'fumadocs-ui/components/github-info';
+
+import { CustomGithubInfo } from "@/components/CustomGithubInfo";
+import { QgisPluginInfo } from "@/components/QgisPluginInfo";
 
 <img src="/images/tianditu/vec.webp" className="rounded-md shadow-md" />
 
-<GithubInfo owner="liuxspro" repo="qgis-plugin-tianditu" className="rounded-xl border bg-fd-card shadow-md no-underline"/>
+<Cards>
+  <Card title="项目地址">
+    <CustomGithubInfo owner="liuxspro" repo="qgis-plugin-tianditu" />
+  </Card>
+  <Card title="插件主页">
+    <QgisPluginInfo plugin_id="2931" />
+  </Card>
+</Cards>
 
-QGIS 天地图插件，方便进行天地图瓦片底图的添加以及简单实现了部分[天地图 Web 服务 API](http://lbs.tianditu.gov.cn/server/guide.html)（地名搜索、地理编码查询、逆地理编码查询）
+QGIS 天地图插件，方便进行天地图瓦片底图的添加以及简单实现了部分[天地图 Web 服务 API](http://lbs.tianditu.gov.cn/server/guide.html)（地名搜索、地理编码查询、逆地理编码查询）。
 
 ## 安装
 
