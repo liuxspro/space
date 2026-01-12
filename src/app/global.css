@@ -11,3 +11,12 @@ blockquote {
 blockquote p {
   @apply my-0;
 }
+
+/* 脚注样式 */
+section.footnotes a:not(.peer) {
+  @apply no-underline text-blue-500 hover:underline decoration-blue-500;
+}
+
+section.footnotes p {
+  @apply my-1;
+}
