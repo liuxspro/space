@@ -10,6 +10,10 @@ tags:
 
 import { CustomGithubInfo } from "@/components/CustomGithubInfo";
 
+<Card title="项目地址">
+  <CustomGithubInfo owner="liuxspro" repo="gcj-rectify" />
+</Card>
+
 ## 前言
 
 一直以来，QGIS 中高德在线地图瓦片的纠偏似乎很难实现，原因在于其使用了 **GCJ02 坐标系**（官方称地形图非线性保密处理算法，俗称火星坐标系、国测局坐标）。此加密是非线性的，如图 1 （By [@OpenQGIS](https://mp.weixin.qq.com/s/wmGJP7Cv_auku_KkfWsQCA)）所示，加密算法会造成 100-700 米不等的偏移，因此不能通过对瓦片进行简单的平移缩放来实现纠偏。
@@ -48,7 +52,7 @@ import { CustomGithubInfo } from "@/components/CustomGithubInfo";
 
 为了方便在 QGIS 中使用，写了一个 QGIS 插件，在后台启动纠偏服务器（fastapi+uvicorn）。
 
-<CustomGithubInfo owner="liuxspro" repo="gcj-rectify" />
+### 插件安装
 
 插件安装前需要安装依赖`gcj-rectify`，可在 QGIS 中通过 Python 控制台执行命令或者在 OSGeo4W Shell 中安装。
 
@@ -66,7 +70,9 @@ pip install gcj-rectify
 
 如果安装缓慢，或者网络错误，请自行更新 pip 镜像。
 
-插件使用方式：先点击菜单栏`GCJ-Rectify`菜单中的`启动服务器`，然后可添加纠偏后的高德地图。
+### 插件使用方式
+
+先点击菜单栏`GCJ-Rectify`菜单中的`启动服务器`，然后可添加纠偏后的地图。
 
 ![](/images/gcj-rectify.jpg)
 
