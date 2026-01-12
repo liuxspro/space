@@ -76,3 +76,24 @@ blockquote p {
   @apply my-0;
 }
 ```
+
+## 修改脚注标题
+
+脚注标题默认是"Footnotes"，可以通过修改`source.config.ts`中的`remarkRehypeOptions`来更改标题文字。
+
+这是remark-rehype的配置项，See: https://github.com/remarkjs/remark-rehype?tab=readme-ov-file#footnotes
+
+```typescript
+export default defineConfig({
+  mdxOptions: {
+    // MDX options
+    remarkRehypeOptions: {
+      footnoteLabel: "参考", // 将脚注文本 Footnotes 翻译成中文
+    },
+  },
+});
+```
+
+
+
+

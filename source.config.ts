@@ -25,5 +25,8 @@ export const docs = defineDocs({
 export default defineConfig({
   mdxOptions: {
     // MDX options
+    remarkRehypeOptions: {
+      footnoteLabel: "参考", // 将脚注文本 Footnotes 翻译成中文
+    },
   },
 });
