@@ -1,0 +1,79 @@
+---
+title: GCJ-Rectify
+description: 高德的在线瓦片地图（GCJ02）的纠偏
+date: 2025-06-22T18:05
+icon: QGISLogo
+tags:
+  - QGIS
+  - 高德地图
+---
+
+import { CustomGithubInfo } from "@/components/CustomGithubInfo";
+
+## 前言
+
+一直以来，QGIS 中高德在线地图瓦片的纠偏似乎很难实现，原因在于其使用了 **GCJ02 坐标系**（官方称地形图非线性保密处理算法，俗称火星坐标系、国测局坐标）。此加密是非线性的，如图 1 （By [@OpenQGIS](https://mp.weixin.qq.com/s/wmGJP7Cv_auku_KkfWsQCA)）所示，加密算法会造成 100-700 米不等的偏移，因此不能通过对瓦片进行简单的平移缩放来实现纠偏。
+![火星坐标加偏可视化 @OpenQGIS ](https://image.liuxs.pro/2025/06/480d137ab0b5906dad46fa315223f0ca.png)
+
+<p className="text-center">图1 火星坐标加偏可视化 @OpenQGIS</p>
+
+奥维可通过设置坐标系为“墨卡托中国”来使用 GCJ02 坐标系的瓦片，一些 Webgis 项目，通过算出 GCJ02 坐标系瓦片四个角的经纬度，然后放置到正确的位置上来实现瓦片的纠偏。然而在 QGIS 中做不到这种对瓦片的精细控制，因此难以实现在线瓦片地图的纠偏，倒是矢量数据，QGIS 有插件可以很方便的转化坐标系。
+
+> 实现 GCJ02 纠偏的 Web 项目
+>
+> - [yangyanggu/amap-xyz-layer](https://github.com/yangyanggu/amap-xyz-layer)
+> - [gisarmory/mapboxgl.InternetMapCorrection](https://github.com/gisarmory/mapboxgl.InternetMapCorrection)
+
+## 纠偏实现
+
+既然难以改变 QGIS 客户端，那么将瓦片重新裁切，可以实现纠偏吗？以高德矢量瓦片`X=13523 Y=6531 Z=14` 为例， 瓦片 A 范围内实际显示的为 GCJ02 坐标系下的内容，而正确的内容要将其对应的 WGS 坐标系范围求出，即瓦片 B 范围。瓦片 B 覆盖了四张瓦片，将这四张瓦片拼合，然后根据范围，从拼合后的图中裁剪出正确范围，得到 WGS 瓦片。
+
+![](https://image.liuxs.pro/2025/06/7080c9fd1812c382b265b7eee684453d.jpg)
+
+<p className="text-center">图2 GCJ02瓦片纠偏实现示意图</p>
+
+## 纠偏效果
+
+根据上面的原理，很容易用 Python 实现这样一个服务器，将 GCJ02 坐标系的瓦片地图重切为 WGS84 坐标系。图 3 为天地图与纠偏后的高德矢量地图卷帘对比图，图 4 为谷歌卫星影像叠加高德路网，可以看出纠偏后的效果还是不错的 😊。
+
+![](https://image.liuxs.pro/2025/06/e993413504f68c6cbf1a79aabe15dcf5.jpg)
+
+<p className="text-center">图3 天地图与纠偏后的高德矢量地图卷帘对比 </p>
+
+![](https://image.liuxs.pro/2025/06/24667dfa2c8365df48e3238d3517ed4f.jpg)
+
+<p className="text-center">图4 谷歌卫星影像叠加高德路网 </p>
+
+## QGIS 插件
+
+为了方便在 QGIS 中使用，写了一个 QGIS 插件，在后台启动纠偏服务器（fastapi+uvicorn）。
+
+<CustomGithubInfo owner="liuxspro" repo="gcj-rectify" />
+
+插件安装前需要安装依赖`gcj-rectify`，可在 QGIS 中通过 Python 控制台执行命令或者在 OSGeo4W Shell 中安装。
+
+<Callout>
+  已将服务器发为成 Python 包,可直接在 Python 环境下启动服务器 `uvx gcj-rectify`
+</Callout>
+
+```bash tab="QGIS控制台中"
+!pip install gcj-rectify
+```
+
+```bash tab="OSGeo4W Shell中"
+pip install gcj-rectify
+```
+
+如果安装缓慢，或者网络错误，请自行更新 pip 镜像。
+
+插件使用方式：先点击菜单栏`GCJ-Rectify`菜单中的`启动服务器`，然后可添加纠偏后的高德地图。
+
+![](/images/gcj-rectify.jpg)
+
+<p className="text-center">图5 QGIS 插件 </p>
+
+## 小节
+
+这两天的折腾表明 WCJ02 坐标系的瓦片是可以重切为 WGS84 坐标系瓦片，以达到纠偏的目的。
+
+> 虽然是纠偏，但是代码中却只用到了`WGS2GCJ`来加密坐标 🤔。
