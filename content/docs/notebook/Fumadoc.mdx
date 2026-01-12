@@ -58,3 +58,21 @@ const cnTranslations: Partial<Translations> = {
   }}
 >
 ```
+
+## 如何修改样式
+
+> 比如引用块的字体是斜体，不习惯。
+
+暂时想到的方法是在`src/app/global.css`中覆盖样式。
+
+```css
+/* 引用块取消斜体和括号 */
+blockquote {
+  @apply not-italic bg-gray-200 dark:bg-gray-800 py-2;
+  quotes: none;
+}
+
+blockquote p {
+  @apply my-0;
+}
+```
