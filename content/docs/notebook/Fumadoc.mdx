@@ -3,6 +3,11 @@ title: Fumadoc 的使用（摸索中）
 date: 2026-01-12T09:57:01+08:00
 ---
 
+## 文档
+
+fumadocs: https://www.fumadocs.dev/docs
+
+
 ## 添加 MDX 组件
 
 `mdx-components.tsx`中`getMDXComponents`返回了mdx笔记中默认可使用的组件。
@@ -30,3 +35,26 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
 ```
 
 另外，也可以添加自定义的组件。
+
+## 更改翻译
+
+默认语言是英文，如目录（On this page），搜索（Search）等。可以添加对应的中文翻译。
+
+在`src/app/layout.tsx`中引入翻译文件，并传递给`RootProvider`。
+
+```typescript
+import type { Translations } from 'fumadocs-ui/i18n';
+
+const cnTranslations: Partial<Translations> = {
+  search: "搜索",
+  toc: "目录",
+  searchNoResult: "无搜索结果",
+};
+// 添加到RootProvider中
+<RootProvider
+  i18n={{
+    locale: "cn",
+    translations: { cn: cnTranslations }["cn"],
+  }}
+>
+```
