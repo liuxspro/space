@@ -1,0 +1,32 @@
+---
+title: Fumadoc 的使用（摸索中）
+date: 2026-01-12T09:57:01+08:00
+---
+
+## 添加 MDX 组件
+
+`mdx-components.tsx`中`getMDXComponents`返回了mdx笔记中默认可使用的组件。
+
+有些组件默认没有加入，比如`Accordion`，需要在mdx文档中引入才能使用。
+
+```typescript
+import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
+```
+
+可以将组件添加到`mdx-components.tsx`中，默认就可以使用了。
+
+```typescript
+import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
+
+export function getMDXComponents(components?: MDXComponents): MDXComponents {
+  return {
+    ...defaultMdxComponents,
+    img: (props) => <ImageZoom {...(props as any)} />,
+    ...components,
+    Accordion,
+    Accordions,
+  };
+}
+```
+
+另外，也可以添加自定义的组件。
