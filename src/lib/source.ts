@@ -12,7 +12,15 @@ const filtered_source = update(docs.toFumadocsSource())
     files.filter((file) => {
       // keep meta files (e.g. `meta.json`)
       if (file.type === "meta") return true;
-      // access file data (type-safe)
+      // set default icon if not set
+      // if (!file.data.icon) {
+      //   if (file.path.endsWith(".mdx")) {
+      //     file.data.icon = "MDX";
+      //   } else {
+      //     file.data.icon = "FileText";
+      //   }
+      // }
+      // filter out draft documents
       return file.data.draft === false;
     })
   )
