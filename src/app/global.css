@@ -4,7 +4,7 @@
 
 /* 引用块取消斜体和括号 */
 blockquote {
-  @apply not-italic bg-gray-200 dark:bg-gray-800 py-2 shadow-md border-s-8;
+  @apply not-italic py-2 border-s-8;
   quotes: none;
 }
 
