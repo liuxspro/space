@@ -1,0 +1,20 @@
+---
+title: WMTS Maps
+description: 将 XYZ 瓦片服务转换为 WMTS 服务
+date: 2026-03-04T10:27:01
+icon: WMTSLogo
+tags:
+  - wmts
+---
+
+
+import { CustomGithubInfo } from "@/components/CustomGithubInfo";
+
+
+<CustomGithubInfo owner="liuxspro" repo="wmts" />
+
+WMTS（Web Map Tile Service）是一种标准协议，用于提供地图瓦片服务。它允许用户通过 URL 请求特定的地图瓦片，并以图像格式返回。这些瓦片可以被客户端应用程序（如 Web 地图或 GIS 软件）使用，以显示地图数据。
+
+XYZ 瓦片服务是一种常见的地图瓦片服务格式，使用 URL 模式 `/{z}/{x}/{y}.png` 来请求瓦片。WMTS 服务支持多种地图投影和坐标系统，将 XYZ 瓦片服务转换为 WMTS 协议，使其更易于集成到各种地图应用程序中。
+
+[wmts map collection](https://wmts.liuxs.pro/collection)
