@@ -2,6 +2,7 @@ const TiandituLogo = () => <img src="/icons/tianditu_logo.svg" width={20} alt=""
 const QGISLogo = () => <img src="/icons/qgis_logo.svg" width={20} alt="" />;
 const Greenbook = () => <img src="/icons/FxemojiGreenbook.svg" width={20} alt="" />;
 const IonEarth = () => <img src="/icons/IonEarth.svg" width={20} alt="" />;
+const WMTSLogo = () => <img src="/icons/WMTS.svg" width={20} alt="" />;
 const MDX = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
@@ -31,4 +32,5 @@ export const customIcons = {
   Greenbook,
   IonEarth,
   MDX,
+  WMTSLogo,
 };
