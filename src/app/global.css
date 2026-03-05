@@ -2,6 +2,21 @@
 @import "fumadocs-ui/css/neutral.css";
 @import "fumadocs-ui/css/preset.css";
 
+.prose {
+  --tw-prose-links:#bd00ff ;
+}
+
+/* 设置全局链接样式，去掉下划线，并在悬停时显示下划线 */
+.prose :where(a:not([data-card])):not(:where([class~="not-prose"], [class~="not-prose"] *)){
+  @apply no-underline hover:underline ;
+}
+
+/* 添加外链标识符（↗）在链接后面，表示这是一个外部链接： */
+/* .prose :where(a:not([data-card])):not(:where([class~="not-prose"], [class~="not-prose"] *))::after{
+  content: "↗";
+  @apply text-sm text-gray-500;
+} */
+
 /* 引用块取消斜体和括号 */
 blockquote {
   @apply not-italic py-2 border-s-8;
